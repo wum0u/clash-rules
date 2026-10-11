@@ -81,7 +81,7 @@ Remove-Item -Recurse -Force $t
 告訴使用者 `$dev\profile.yaml` 的路徑，並請他：
 
 - **電腦**：FlClash「設定檔」→「＋」→「檔案」匯入，開啟虛擬網卡（堆疊 gVisor），不要開「覆寫 DNS」。
-- **Android**：用 Quick Share 等方式傳到手機，同樣匯入。要搭配 AdGuard 的話照 GUIDE.md 的 Android 一節。
+- **Android**：請使用者自行把檔案傳到手機，同樣匯入並開啟 VPN。只有使用者表示手機已在用 AdGuard 時，才照 GUIDE.md 附錄設定。
 
 匯入、開關虛擬網卡都是 GUI 操作，agent 不要嘗試代做。
 

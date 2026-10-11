@@ -30,7 +30,7 @@ proxies:
     public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
     mtu: 1280
     udp: true
-  # >>> japan：Proton VPN 免費版日本節點（DMM 遊戲用）
+  # >>> japan：Proton VPN 免費版日本節點（限日本 IP 的服務用）
   - name: Proton-JP
     type: wireguard
     server: {{PROTON_SERVER}}
