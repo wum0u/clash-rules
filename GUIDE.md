@@ -49,7 +49,18 @@ DMM 遊戲需要日本 IP，用 Proton VPN 免費版的 WireGuard 設定（[參�
 
 不需要日本節點的話，照範本註解刪掉相關部分。
 
-## 3. 匯入 FlClash
+## 3. 安裝並匯入 FlClash
+
+### 安裝
+
+| 平台 | 方式 |
+|---|---|
+| Windows | `scoop install extras/flclash` 或 `winget install chen08209.FlClash`，也可以到 [Releases](https://github.com/chen08209/FlClash/releases) 下載 `windows-amd64-setup.exe` |
+| Android | [Releases](https://github.com/chen08209/FlClash/releases) 下載 `android-arm64-v8a.apk`（大部分手機適用），或在 F-Droid 加入[作者的軟體庫](https://chen08209.github.io/FlClash-fdroid-repo/repo?fingerprint=789D6D32668712EF7672F9E58DEEB15FBD6DCEEC5AE7A4371EA72F2AAE8A12FD)，之後能自動更新 |
+
+ARM 處理器的 Windows 電腦選 `windows-arm64`；macOS、Linux 版也在 Releases。
+
+### 匯入
 
 1. 「設定檔」→「＋」→「檔案」，選設定檔並設為使用中。
 2. 開啟**虛擬網卡**，堆疊選 **gVisor**。命令列工具（pip、git）不讀系統代理，不開虛擬網卡就不會分流。
@@ -63,7 +74,7 @@ DMM 遊戲需要日本 IP，用 Proton VPN 免費版的 WireGuard 設定（[參�
 
 ### Android
 
-FlClash 有 Android 版（F-Droid 也有）。手機要用**自己的** WARP 帳號與設定檔，用 Quick Share 等方式傳過去匯入一次即可，之後規則會自動更新。
+手機要用**自己的** WARP 帳號與設定檔，用 Quick Share 等方式傳過去匯入一次即可，之後規則會自動更新。
 
 **只用 FlClash**：開啟 VPN 就是虛擬網卡，其餘同上。
 
