@@ -1,0 +1,4 @@
+# 走日本節點（Proton）
+payload:
+  # DMM 遊戲需要日本 IP
+  - GEOSITE,dmm

@@ -7,30 +7,28 @@
 | 檔案 | 用途 |
 |---|---|
 | `direct.yaml` | 強制直連 |
-| `detour.yaml` | 走 WARP 繞路（含 Fastly AS54113） |
+| `japan.yaml` | 走日本節點（DMM） |
+| `detour.yaml` | 走 WARP 繞路（GitHub、Twitch、Telegram、Fastly AS54113） |
+
+網站分類用的是 Mihomo 內建的 GEOSITE／GEOIP 資料庫，不需要另外引用其他規則集。
 
 ## 使用方式
 
 ```yaml
+x-rules: &rules
+  type: http
+  behavior: classical
+  format: yaml
+  interval: 3600
+
 rule-providers:
-  MyDirect:
-    type: http
-    behavior: classical
-    format: yaml
-    url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/direct.yaml"
-    path: ./ruleset/MyDirect.yaml
-    interval: 3600
-  MyDetour:
-    type: http
-    behavior: classical
-    format: yaml
-    url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/detour.yaml"
-    path: ./ruleset/MyDetour.yaml
-    interval: 3600
+  MyDirect: { <<: *rules, url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/direct.yaml", path: ./ruleset/MyDirect.yaml }
+  MyJapan:  { <<: *rules, url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/japan.yaml",  path: ./ruleset/MyJapan.yaml }
+  MyDetour: { <<: *rules, url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/detour.yaml", path: ./ruleset/MyDetour.yaml }
 
 rules:
   - RULE-SET,MyDirect,DIRECT
-  # ……其他規則……
-  - RULE-SET,MyDetour,Detour   # 含 IP-ASN，需要解析 DNS，放在網域規則之後
+  - RULE-SET,MyJapan,Japan
+  - RULE-SET,MyDetour,Detour   # 含 IP 規則，放在最後
   - MATCH,DIRECT
 ```

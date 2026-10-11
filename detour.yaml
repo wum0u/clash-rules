@@ -1,4 +1,10 @@
-# 走 WARP 繞路的規則（HiNet 國際線路塞車）
+# 走 WARP 繞路（HiNet 國際線路塞車）
 payload:
+  # github.com、ghcr.io 本身不在 Fastly
+  - GEOSITE,github
+  # Twitch 影片走 Amazon IVS，不在 Fastly
+  - GEOSITE,twitch
+  - GEOSITE,telegram
+  - GEOIP,telegram
   # Fastly CDN：涵蓋 PyPI、Reddit、X 圖片、GitHub 下載（githubusercontent）、Twitch 網頁等
   - IP-ASN,54113
