@@ -1,0 +1,64 @@
+# FlClash／Clash Verge Rev 設定檔範本
+# 把 <...> 換成 wgcf-profile.conf 裡的值，詳見 GUIDE.md
+# 每台裝置要用自己的 WARP 帳號（金鑰），不能共用
+
+dns:
+  enable: true
+  enhanced-mode: redir-host
+  nameserver:
+    - system
+
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: true
+  sniff:
+    HTTP: { ports: [80, 8080-8880] }
+    TLS: { ports: [443, 8443] }
+    QUIC: { ports: [443, 8443] }
+
+proxies:
+  - name: WARP
+    type: wireguard
+    server: 162.159.192.1
+    port: 2408
+    ip: 172.16.0.2
+    ipv6: <Address 的 IPv6，不含 /128>
+    private-key: <PrivateKey>
+    public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
+    mtu: 1280
+    udp: true
+  # 選用：日本節點（DMM 遊戲用），不需要就刪掉這段、Japan 群組和 MyJapan
+  - name: Proton-JP
+    type: wireguard
+    server: <Endpoint 的 IP>
+    port: 51820
+    ip: 10.2.0.2
+    private-key: <PrivateKey>
+    public-key: <PublicKey>
+    persistent-keepalive: 25
+    mtu: 1280
+    udp: true
+
+proxy-groups:
+  - { name: Detour, type: select, proxies: [WARP, DIRECT] }
+  - { name: Japan, type: select, proxies: [Proton-JP, DIRECT] }
+
+# 規則都在 https://github.com/wum0u/clash-rules ，改那邊就好，每小時自動更新
+x-rules: &rules
+  type: http
+  behavior: classical
+  format: yaml
+  interval: 3600
+
+rule-providers:
+  MyDirect: { <<: *rules, url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/direct.yaml", path: ./ruleset/MyDirect.yaml }
+  MyJapan:  { <<: *rules, url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/japan.yaml",  path: ./ruleset/MyJapan.yaml }
+  MyDetour: { <<: *rules, url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/detour.yaml", path: ./ruleset/MyDetour.yaml }
+
+rules:
+  - RULE-SET,MyDirect,DIRECT
+  - RULE-SET,MyJapan,Japan
+  - RULE-SET,MyDetour,Detour
+  - MATCH,DIRECT

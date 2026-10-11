@@ -4,6 +4,8 @@
 
 起因是中華電信 HiNet 連到 Fastly CDN 的國際線路塞車，讓這些流量改走 Cloudflare WARP。
 
+**從頭設定（含 wgcf）請看 [GUIDE.md](GUIDE.md)**，設定檔範本在 [`profile.example.yaml`](profile.example.yaml)。
+
 | 檔案 | 用途 |
 |---|---|
 | `direct.yaml` | 強制直連 |
