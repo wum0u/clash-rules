@@ -67,9 +67,9 @@ FlClash 有 Android 版（F-Droid 也有）。手機要用**自己的** WARP 帳
 
 **只用 FlClash**：開啟 VPN 就是虛擬網卡，其餘同上。
 
-**搭配 AdGuard 擋廣告（選用）**：Android 同一時間只能有一個 VPN，所以讓 AdGuard 當 VPN，再把流量轉給 FlClash（[AdGuard 官方說明](https://adguard.com/kb/adguard-for-android/solving-problems/outbound-proxy/)）：
+**搭配 AdGuard 擋廣告（選用，需要 AdGuard 付費版）**：Android 同一時間只能有一個 VPN，所以讓 AdGuard 當 VPN，再把流量轉給 FlClash（[AdGuard 官方說明](https://adguard.com/kb/adguard-for-android/solving-problems/outbound-proxy/)）：
 
-1. **FlClash**：關掉 VPN，只啟動代理。代理連接埠預設是 `7890`（設定裡的「混合連接埠」）。
+1. **FlClash**：關掉 VPN，只啟動代理，連接埠是 `7890`。
 2. **AdGuard**：「應用程式管理」→ FlClash → 關掉「透過 AdGuard 路由流量」，避免流量繞圈。
 3. **AdGuard**：「設定」→「過濾」→「網路」→「代理」→「代理伺服器」→ 新增：類型 `SOCKS5`、主機 `127.0.0.1`、連接埠 `7890`，然後開啟「代理」。
 
