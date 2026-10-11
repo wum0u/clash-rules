@@ -5,3 +5,5 @@ payload:
   # 響 HiBiKi Radio：網站與 API 直連可用，但音訊（CloudFront）擋海外 IP
   - DOMAIN-SUFFIX,hibiki-radio.jp
   - DOMAIN,d22puzix29w08m.cloudfront.net
+  # niconico：部分動畫、頻道限日本
+  - GEOSITE,niconico
