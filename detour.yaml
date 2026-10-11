@@ -1,0 +1,4 @@
+# 走 WARP 繞路的規則（HiNet 國際線路塞車）
+payload:
+  # Fastly CDN：涵蓋 PyPI、Reddit、X 圖片、GitHub 下載（githubusercontent）、Twitch 網頁等
+  - IP-ASN,54113

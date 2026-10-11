@@ -1,0 +1,4 @@
+# 強制直連的規則
+payload:
+  # WARP 出口 IP 多人共用，GitHub API 未登入 60 次／小時的額度很快被用完
+  - DOMAIN,api.github.com
