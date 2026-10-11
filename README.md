@@ -1,36 +1,26 @@
 # clash-rules
 
-自用的 Mihomo（Clash.Meta）分流規則，給 FlClash／Clash Verge Rev 用。
+給 FlClash／Clash Verge Rev（Mihomo 核心）用的自用分流規則。
 
-起因是中華電信 HiNet 連到 Fastly CDN 的國際線路塞車，讓這些流量改走 Cloudflare WARP。
+中華電信 HiNet 連 Fastly CDN 的國際線路常塞車，這套規則只讓受影響的網站改走 Cloudflare WARP，DMM 走日本節點，其他照常直連。
 
-**從頭設定（含 wgcf）請看 [GUIDE.md](GUIDE.md)**，設定檔範本在 [`profile.example.yaml`](profile.example.yaml)。
-
-| 檔案 | 用途 |
-|---|---|
-| `direct.yaml` | 強制直連 |
-| `japan.yaml` | 走日本節點（DMM） |
-| `detour.yaml` | 走 WARP 繞路（GitHub、Twitch、Telegram、Fastly AS54113） |
-
-網站分類用的是 Mihomo 內建的 GEOSITE／GEOIP 資料庫，不需要另外引用其他規則集。
-
-## 使用方式
-
-```yaml
-x-rules: &rules
-  type: http
-  behavior: classical
-  format: yaml
-  interval: 3600
-
-rule-providers:
-  MyDirect: { <<: *rules, url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/direct.yaml", path: ./ruleset/MyDirect.yaml }
-  MyJapan:  { <<: *rules, url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/japan.yaml",  path: ./ruleset/MyJapan.yaml }
-  MyDetour: { <<: *rules, url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/detour.yaml", path: ./ruleset/MyDetour.yaml }
-
-rules:
-  - RULE-SET,MyDirect,DIRECT
-  - RULE-SET,MyJapan,Japan
-  - RULE-SET,MyDetour,Detour   # 含 IP 規則，放在最後
-  - MATCH,DIRECT
 ```
+FlClash ─┬─ 區域網路、direct.yaml ──→ 直連
+         ├─ japan.yaml ────────────→ Japan（Proton 日本）
+         ├─ detour.yaml ───────────→ Detour（WARP）
+         └─ 其他 ──────────────────→ Default（預設直連，可臨時切到日本）
+```
+
+## 開始使用
+
+從頭設定（wgcf、Proton、FlClash、Android＋AdGuard）請看 **[GUIDE.md](GUIDE.md)**，設定檔範本是 [`profile.example.yaml`](profile.example.yaml)。
+
+## 規則檔
+
+| 檔案 | 走哪裡 | 內容 |
+|---|---|---|
+| [`direct.yaml`](direct.yaml) | 直連 | `api.github.com`（WARP 出口 IP 共用，API 額度會被用光） |
+| [`japan.yaml`](japan.yaml) | Japan | DMM |
+| [`detour.yaml`](detour.yaml) | Detour | GitHub、Twitch、Telegram、Fastly（AS54113） |
+
+裝置每小時自動更新規則，改完推上來就會生效，不必重新匯入設定檔。
