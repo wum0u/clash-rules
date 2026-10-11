@@ -17,14 +17,14 @@ rule-providers:
     type: http
     behavior: classical
     format: yaml
-    url: "https://raw.githubusercontent.com/<帳號>/clash-rules/main/direct.yaml"
+    url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/direct.yaml"
     path: ./ruleset/MyDirect.yaml
     interval: 3600
   MyDetour:
     type: http
     behavior: classical
     format: yaml
-    url: "https://raw.githubusercontent.com/<帳號>/clash-rules/main/detour.yaml"
+    url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/detour.yaml"
     path: ./ruleset/MyDetour.yaml
     interval: 3600
 
