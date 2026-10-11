@@ -13,7 +13,7 @@ FlClash ─┬─ 區域網路、direct.yaml ──→ 直連
 
 ## 開始使用
 
-從頭設定（wgcf、Proton、FlClash、Android＋AdGuard）請看 **[GUIDE.md](GUIDE.md)**，設定檔範本是 [`profile.example.yaml`](profile.example.yaml)。
+從頭設定（wgcf、Proton、FlClash、Android＋AdGuard）請看 **[GUIDE.md](GUIDE.md)**，設定檔範本是 [`profile.example.yaml`](profile.example.yaml)。讓 agent 代為設定請看 [AGENTS.md](AGENTS.md)。
 
 ## 規則檔
 

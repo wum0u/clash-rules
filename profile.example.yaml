@@ -1,6 +1,7 @@
 # FlClash／Clash Verge Rev 設定檔範本
-# 把 <...> 換成 wgcf-profile.conf 裡的值，詳見 GUIDE.md
-# 每台裝置要用自己的 WARP 帳號（金鑰），不能共用
+# 把 {{...}} 換成實際的值，詳見 GUIDE.md（人）或 AGENTS.md（agent）
+# 每台裝置要用自己的 WARP 帳號與 Proton 設定，不能共用
+# 不需要日本節點：刪掉 >>> japan 到 <<< japan 之間的內容、結尾有「# japan」的行，再把「Proton-JP, 」刪掉
 
 dns:
   enable: true
@@ -24,26 +25,27 @@ proxies:
     server: 162.159.192.1
     port: 2408
     ip: 172.16.0.2
-    ipv6: <Address 的 IPv6，不含 /128>
-    private-key: <PrivateKey>
+    ipv6: {{WARP_IPV6}}
+    private-key: {{WARP_PRIVATE_KEY}}
     public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
     mtu: 1280
     udp: true
-  # 選用：日本節點（DMM 遊戲用），不需要就刪掉這段、Japan 群組、MyJapan，以及 Default 裡的 Proton-JP
+  # >>> japan：Proton VPN 免費版日本節點（DMM 遊戲用）
   - name: Proton-JP
     type: wireguard
-    server: <Endpoint 的 IP>
+    server: {{PROTON_SERVER}}
     port: 51820
     ip: 10.2.0.2
-    private-key: <PrivateKey>
-    public-key: <PublicKey>
+    private-key: {{PROTON_PRIVATE_KEY}}
+    public-key: {{PROTON_PUBLIC_KEY}}
     persistent-keepalive: 25
     mtu: 1280
     udp: true
+  # <<< japan
 
 proxy-groups:
   - { name: Detour, type: select, proxies: [WARP, DIRECT] }
-  - { name: Japan, type: select, proxies: [Proton-JP, DIRECT] }
+  - { name: Japan, type: select, proxies: [Proton-JP, DIRECT] } # japan
   # 沒被規則抓到的流量；臨時要全部走日本就切成 Proton-JP
   - { name: Default, type: select, proxies: [DIRECT, Proton-JP, WARP] }
 
@@ -56,13 +58,13 @@ x-rules: &rules
 
 rule-providers:
   MyDirect: { <<: *rules, url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/direct.yaml", path: ./ruleset/MyDirect.yaml }
-  MyJapan:  { <<: *rules, url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/japan.yaml",  path: ./ruleset/MyJapan.yaml }
+  MyJapan:  { <<: *rules, url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/japan.yaml",  path: ./ruleset/MyJapan.yaml } # japan
   MyDetour: { <<: *rules, url: "https://raw.githubusercontent.com/wum0u/clash-rules/main/detour.yaml", path: ./ruleset/MyDetour.yaml }
 
 rules:
   # 區域網路永遠直連，Default 切到國外節點時才不會斷
   - GEOIP,private,DIRECT,no-resolve
   - RULE-SET,MyDirect,DIRECT
-  - RULE-SET,MyJapan,Japan
+  - RULE-SET,MyJapan,Japan # japan
   - RULE-SET,MyDetour,Detour
   - MATCH,Default
