@@ -5,5 +5,11 @@ payload:
   # 響 HiBiKi Radio：網站與 API 直連可用，但音訊（CloudFront）擋海外 IP
   - DOMAIN-SUFFIX,hibiki-radio.jp
   - DOMAIN,d22puzix29w08m.cloudfront.net
-  # niconico：部分動畫、頻道限日本
-  - GEOSITE,niconico
+  # niconico：頁面、API、百科、頻道走日本（臺灣 IP 會被擋）；影片串流與靜態檔直連
+  - DOMAIN,www.nicovideo.jp
+  - DOMAIN,nvapi.nicovideo.jp
+  - DOMAIN,live.nicovideo.jp
+  - DOMAIN,account.nicovideo.jp
+  - DOMAIN,dic.nicovideo.jp
+  - DOMAIN-SUFFIX,nicodic.jp
+  - DOMAIN-SUFFIX,nicochannel.jp
