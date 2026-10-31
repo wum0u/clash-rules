@@ -6,5 +6,7 @@ payload:
   - GEOSITE,twitch
   - GEOSITE,telegram
   - GEOIP,telegram
+  # X 網頁與部分圖片影片在 Cloudflare，HiNet 常被分去東京；經 WARP 走 Cloudflare 內部
+  - GEOSITE,twitter
   # Fastly CDN：涵蓋 PyPI、Reddit、X 圖片、GitHub 下載（githubusercontent）、Twitch 網頁等
   - IP-ASN,54113
